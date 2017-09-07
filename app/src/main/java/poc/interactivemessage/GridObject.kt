@@ -1,30 +1,31 @@
 package poc.interactivemessage
 
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import poc.interactivemessage.utils.Paints
 
 class GridObject : MessageObject() {
 
-    val paint: Paint = Paint()
-
-    init {
-        paint.color = Color.BLACK
-        paint.alpha = 50
-    }
-
-    override fun draw(canvas: Canvas) {
+    override fun onDraw(canvas: Canvas) {
         val step = 50
         val w = canvas.width / step
         val h = canvas.height / step
+        val centerX = canvas.width / 2f
+        val centerY = canvas.height / 2f
+        val height = canvas.height.toFloat()
+        val width = canvas.width.toFloat()
 
         (0..w)
                 .map { (step * it).toFloat() }
-                .forEach { canvas.drawLine(it, 0f, it, canvas.height.toFloat(), paint) }
+                .forEach { canvas.drawLine(it, 0f, it, height, Paints.BlackAlpha50) }
+
 
         (0..h)
                 .map { (step * it).toFloat() }
-                .forEach { canvas.drawLine(0f, it, canvas.width.toFloat(), it, paint) }
+                .forEach { canvas.drawLine(0f, it, width, it, Paints.BlackAlpha50) }
+
+
+        canvas.drawLine(centerX, 0f, centerX, height, Paints.BlackAlpha100)
+        canvas.drawLine(0f, centerY, width, centerY, Paints.BlackAlpha100)
     }
 
     override fun isInBounds(x: Float, y: Float): Boolean {

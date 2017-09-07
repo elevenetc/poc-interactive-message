@@ -20,12 +20,8 @@ class InteractiveMessage : ViewGroup {
 
     init {
         setWillNotDraw(false)
-        val rect = RectObject()
-        rect.x = 100f
-        rect.y = 100f
-        rect.width = 150f
-        rect.height = 150f
-        objects.add(rect)
+        objects.add(RectObject(100f, 100f, 150f, 150f))
+        objects.add(TextObject("Hello"))
         objects.add(GridObject())
     }
 
@@ -65,7 +61,7 @@ class InteractiveMessage : ViewGroup {
         canvas?.drawColor(Color.RED)
 
         for (obj in objects) {
-            obj.draw(canvas!!)
+            obj.onDraw(canvas!!)
         }
     }
 }
